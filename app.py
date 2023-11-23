@@ -89,5 +89,5 @@ def update_task():
 
     return jsonify(tarefas.to_dict('records'))
 
-if__name_ == '_main_':
+if__name__== '_main_':
 app.run(debug=True, host="0.0.0.0")
