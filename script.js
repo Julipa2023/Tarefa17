@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const tabela = document.querySelector(".tabela-js");
 
-    // Obtenha tarefas da API e preencha a tabela ao carregar a página
+    
     axios.get(`http://127.0.0.1:5000/list`)
         .then(function (resposta) {
             getData(resposta.data);
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error(error);
         });
 
-    // Função para popular a tabela com tarefas
+
     function getData(dados) {
         tabela.innerHTML = dados.map(item => `
         <tr>
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     function todos_Eventos() {
-        // Adicione uma nova tarefa
+       
         document.querySelector("#add-tarefa").addEventListener("click", function () {
             const tarefa = document.querySelector("#tarefa").value;
             if (tarefa === "") {
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
         });
 
-        // Exclua uma tarefa
+        
         document.querySelectorAll(".delete-btn").forEach(btn => {
             btn.addEventListener("click", function (e) {
                 const id = e.target.closest("tr").querySelector("th").textContent;
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-        // Defina o ID e a tarefa quando o botão de edição é clicado
+     
         document.querySelector(".tabela-js").addEventListener("click", function (e) {
             const editBtn = e.target.closest(".edit-btn");
             if (editBtn) {
@@ -67,11 +67,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 const id = row.querySelector("th").textContent;
                 const tarefa = row.querySelector("td").textContent;
                 document.querySelector("#edit-tarefa").value = tarefa;
-                document.querySelector("#edit-tarefa-btn").dataset.id = id; // Armazena o ID no botão de edição
+                document.querySelector("#edit-tarefa-btn").dataset.id = id; 
             }
         });
 
-        // Atualize uma tarefa
+      
         document.querySelector("#edit-tarefa-btn").addEventListener("click", function () {
             const tarefaupdate = document.querySelector("#edit-tarefa").value;
             const id = this.dataset.id; // Obtém o ID armazenado no botão de edição
@@ -85,14 +85,14 @@ document.addEventListener('DOMContentLoaded', function () {
                         console.error(error);
                     })
                     .finally(function () {
-                        document.querySelector("#edit-tarefa-btn").dataset.id = null; // Limpa o ID armazenado
+                        document.querySelector("#edit-tarefa-btn").dataset.id = null; 
                     });
             }
         });
 
     }
 
-    // Função para recarregar as tarefas
+    
     function loadTasks() {
         axios.get(`http://127.0.0.1:5000/list`)
             .then(function (resposta) {
